@@ -31,10 +31,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import compare.json.CompareJson;
 
-public class CreateDDL {
+public class JTSQL {
     private String dir = "";
 
-    public CreateDDL(String dir) {
+    public JTSQL(String dir) {
         this.dir = dir;
     }
 
