@@ -71,13 +71,13 @@ new JTSQL("C:/Users/seu_usuario/Desktop/Meu_SQL").init(fileString, dateTime);
 - O diretório será criado automaticamente, se não existir.
 - O arquivo `.sql` será gerado no local indicado.
 
-<!-- ## Requisitos
+## Requisitos
 
 - **Java 21**
 - **Gradle** (com Kotlin DSL)
-- Acesso ao repositório [JitPack](https://jitpack.io) -->
+- Acesso ao repositório [JitPack](https://jitpack.io)
 
-<!-- ## Dependências
+## Dependências
 
 No seu `build.gradle.kts` adicione:
 
@@ -93,7 +93,7 @@ dependencies {
 }
 ```
 
-Essas dependências são essenciais para o funcionamento do JTSQL. -->
+Essas dependências são essenciais para o funcionamento do JTSQL.
 
 ---
 
