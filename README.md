@@ -1,8 +1,8 @@
-# JTSQL (JsonToSQL)
+# 🧩 JTSQL (JsonToSQL)
 
 JTSQL é uma ferramenta que converte arquivos JSON em comandos SQL prontos para uso em bancos de dados MySQL. Ideal para automatizar a criação de tabelas e colunas a partir de estruturas JSON padronizadas.
 
-## Como funciona
+## ⚙️ Como funciona
 
 O JTSQL espera um arquivo JSON no seguinte formato:
 
@@ -35,9 +35,9 @@ O JTSQL espera um arquivo JSON no seguinte formato:
 - `default`: Valor padrão. Use `"none"` para não definir, `false` para remover, ou outro valor para definir o default.
 - `null`: Se `true`, permite NULL. Se `false`, será NOT NULL.
 
-## Exemplo de uso
+## 💡 Exemplo de uso
 
-### 1. Preparando o JSON
+### 📝 1. Preparando o JSON
 
 Você pode criar o JSON como uma string:
 ```java
@@ -49,7 +49,7 @@ Ou ler de um arquivo:
 String fileString = Files.readString(Paths.get("diretorio/do/arquivo/file.json"));
 ```
 
-### 2. Definindo a data de modificação
+### ⏱ 2. Definindo a data de modificação
 
 Manual (para testes):
 ```java
@@ -62,7 +62,7 @@ long lastModified = file.lastModified();
 LocalDateTime data = Instant.ofEpochMilli(lastModified).atZone(ZoneId.systemDefault()).toLocalDateTime();
 ```
 
-### 3. Convertendo e salvando o SQL
+### 🛠️ 3. Convertendo e salvando o SQL
 
 Basta instanciar o JTSQL com o diretório de destino:
 ```java
@@ -71,13 +71,13 @@ new JTSQL("C:/Users/seu_usuario/Desktop/Meu_SQL").init(fileString, dateTime);
 - O diretório será criado automaticamente, se não existir.
 - O arquivo `.sql` será gerado no local indicado.
 
-## Requisitos
+## 📦 Requisitos
 
 - **Java 21**
 - **Gradle** (com Kotlin DSL)
 - Acesso ao repositório [JitPack](https://jitpack.io)
 
-## Dependências
+## 📚 Dependências
 
 No seu `build.gradle.kts` adicione:
 
@@ -97,14 +97,14 @@ Essas dependências são essenciais para o funcionamento do JTSQL.
 
 ---
 
-## Futuro
+## 🚀 Futuro
 
 A ideia é tornar o JTSQL flexível para outros bancos de dados além do MySQL.
 
-## Licença
+## 📄 Licença
 
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 
-> Feito por emnuelht – contribuições são bem-vindas!
+> 👨‍💻 Feito por emnuelht – contribuições são bem-vindas!
