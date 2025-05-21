@@ -1,0 +1,16 @@
+{
+    "usu__tb01": {
+        "nome__cn01": {
+            "type": "varchar",
+            "length": 10,
+            "default": "Sem",
+            "null": false
+        },
+        "criado_em__cn02": {
+            "type": "timestamp",
+            "length": 100,
+            "default": "current_timestamp",
+            "null": false
+        }
+    }
+}
