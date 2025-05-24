@@ -38,7 +38,7 @@ public class JTSQL {
         this.dir = dir;
     }
 
-    public void init(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
+    public boolean init(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
         try {
             File file = new File("src/main/resources/.temp/fileOld.json");
             if (file.exists()) {
@@ -50,21 +50,22 @@ public class JTSQL {
                 if (yyyyMMdd_Hms != null && yyyyMMdd_Hms.isAfter(data)) {
                     if (jsoString != null && !jsoString.isEmpty()) {
                         // Enviando o json para comparação
-                        compareFiles(jsoString);
+                        return compareFiles(jsoString);
                     } else {
                         // O json está vazio
                         throw new IllegalArgumentException("Change NULL");
                     }
                 }
             } else {
-                getCatchException(jsoString, yyyyMMdd_Hms);
+                return getCatchException(jsoString, yyyyMMdd_Hms);
             }
         } catch (IOException e) {
-            getCatchException(jsoString, yyyyMMdd_Hms);
+            return getCatchException(jsoString, yyyyMMdd_Hms);
         }
+        return false;
     }
 
-    private void getCatchException(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
+    private boolean getCatchException(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
         if (yyyyMMdd_Hms == null || jsoString == null) {
             throw new NullPointerException("yyyyMMdd_Hms ou jsoString está null. Nao e possivel continuar.");
         }
@@ -72,7 +73,7 @@ public class JTSQL {
         boolean response = createFile(yyyyMMdd_Hms.toString().replace("T", " "));
         if (response) {
             // Enviando o json para comparação
-            compareFiles(jsoString);
+            return compareFiles(jsoString);
         } else {
             throw new IOException("Ocorreu um erro ao criar os arquivos na pasta .temp");
         }
@@ -98,7 +99,7 @@ public class JTSQL {
         }
     }
 
-    private void compareFiles(String jsonString) {
+    private boolean compareFiles(String jsonString) {
         // Criando um file temporario com o conteudo do jsonString
         File file = createFileTemporary(jsonString);
         if (file != null) {
@@ -145,8 +146,10 @@ public class JTSQL {
                     // Criando o arquivo .sql com os comandos
                     boolean response = createFileSQL(stringSQL.toString());
                     if (response) {
+                        boolean res = updateFileOld();
                         System.out.println("Arquivo sql foi criado com sucesso!");
-                        System.out.println(updateFileOld() ? "FileOld atualizado!" : "Ocorreu um erro ao atualizar o FileOld...");
+                        System.out.println(res ? "FileOld atualizado!" : "Ocorreu um erro ao atualizar o FileOld...");
+                        return true;
                     } else {
                         throw new IOException("Ocorreu um erro ao criar o arquivo sql");
                     }
@@ -160,6 +163,7 @@ public class JTSQL {
         } else {
             System.out.println("Não foi possivel criar o arquivo");
         }
+        return false;
     }
 
     private File createFileTemporary(String content) {
