@@ -38,7 +38,7 @@ public class JTSQL {
         this.dir = dir;
     }
 
-    public boolean init(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
+    public int init(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
         try {
             File file = new File("src/main/resources/.temp/fileOld.json");
             if (file.exists()) {
@@ -62,10 +62,10 @@ public class JTSQL {
         } catch (IOException e) {
             return getCatchException(jsoString, yyyyMMdd_Hms);
         }
-        return false;
+        return 1;
     }
 
-    private boolean getCatchException(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
+    private int getCatchException(String jsoString, LocalDateTime yyyyMMdd_Hms) throws IOException {
         if (yyyyMMdd_Hms == null || jsoString == null) {
             throw new NullPointerException("yyyyMMdd_Hms ou jsoString está null. Nao e possivel continuar.");
         }
@@ -99,7 +99,7 @@ public class JTSQL {
         }
     }
 
-    private boolean compareFiles(String jsonString) {
+    private int compareFiles(String jsonString) {
         // Criando um file temporario com o conteudo do jsonString
         File file = createFileTemporary(jsonString);
         if (file != null) {
@@ -149,12 +149,13 @@ public class JTSQL {
                         boolean res = updateFileOld();
                         System.out.println("Arquivo sql foi criado com sucesso!");
                         System.out.println(res ? "FileOld atualizado!" : "Ocorreu um erro ao atualizar o FileOld...");
-                        return true;
+                        return 0;
                     } else {
                         throw new IOException("Ocorreu um erro ao criar o arquivo sql");
                     }
                 } else {
                     System.out.println("Nada para se comparar");
+                    return 1;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -163,7 +164,7 @@ public class JTSQL {
         } else {
             System.out.println("Não foi possivel criar o arquivo");
         }
-        return false;
+        return 999;
     }
 
     private File createFileTemporary(String content) {

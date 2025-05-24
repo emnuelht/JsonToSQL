@@ -24,7 +24,9 @@ public class Main {
             // Ex:
             // "C:/Users/seu_usuario/Desktop"
             // "C:/Users/seu_usuario/Desktop/Meu_SQL" (a pasta "Meu_SQL" será criada se não existir)
-            new JTSQL("./").init(fileString, dateTime);
+            // 
+            // A class JTSQL vai retornar 3 tipos de retorno, 0 pra feito algo, 1 para nada para ser feito e 999 algo deu errado
+            System.out.println(new JTSQL("./").init(fileString, dateTime));
         } catch (IOException e) {
             e.printStackTrace();
         }
